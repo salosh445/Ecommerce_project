@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<html>
+<head>
+	<title>Shopping Cart</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+	<link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+</head>
+<body>
+	<main class="page">
+	 	<section class="shopping-cart dark">
+			{% for i in ci %}
+	 		<div class="container">
+		        <div class="content">
+	 				<div class="row">
+	 					<div class="col-md-12 col-lg-8">
+	 						<div class="items">
+<!--								<a href="#" class="btn btn-danger a-btn-slide-text">-->
+<!--			<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>-->
+			 <span><a href="{% url 'remove' i.prodt.id %}">DELETE</a></span>
+				 				<div class="product">
+				 					<div class="row">
+					 					<div class="image">
+					 					<a href="{{i.prodt.get_url}}">&nbsp;&nbsp;<img src="{{i.prodt.image.url}}" alt="{{i.prodt.name}}" style="height:250;width:250"></a>
+					 					</div>
+					 					<div class="col-md-8">
+					 						<div class="info">
+						 						<div class="row">
+							 						<div class="col-md-5 product-name">
+														<div>ID: <span class="value">{{i.prodt.id}}</span></div>
+														<div>Name: <span class="value">{{i.prodt.name}}</span></div>
+														<div>Price: <span class="value">{{i.prodt.price}}</span></div>
+									 				<div>Quantity: <span class="value"><a href="{% url 'addcart' i.prodt.id %}"><i class="fa fa-plus" style="font-size:14px"></i></a>&nbsp;&nbsp;{{i.qty}}&nbsp;&nbsp;<a href="{% url 'cart_decrement' i.prodt.id %}"><i class="fa fa-minus" style="font-size:14px"></i></a>  </span></div>
+													<div style="color:green;padding-left:100px">TOTAL: <span class="value">{{i.total}}</span></div
+													</div>
+												</div>
+											</div>
+										</div>
+
+<!--										<div class="col-md-4 quantity">-->
+<!--											<label>Quantity:  +<a href="{{% url"     -</label>-->
+<!--											<input id="quantity" type="number" value ="{{i.qty}}" class="form-control quantity-input">-->
+										</div>
+<!--											<span>Rs1200</span>-->
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+{% endfor %}
+				<div class="col-md-12 col-lg-4">
+					<div class="col-md-8">
+			 		<div class="summary">
+			 			<div class="summary-item"><span class="text">Subtotal</span><span class="price">{{t}}</span></div>
+			 				<button type="button" class="btn btn-primary btn-lg btn-block">Checkout</button>
+					</div>
+					</div>
+				</div>
+</section>
+</main>
+</body>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
+{% endblock %}
